@@ -1,0 +1,29 @@
+package controller;
+
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/FirstServlet")
+public class FirstServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    
+    public FirstServlet() {
+        super();
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nom = request.getParameter("nom");
+        String age = request.getParameter("age");
+        System.out.println("Mon nom est " + nom + " et j'ai " + age + " ans");
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+}
