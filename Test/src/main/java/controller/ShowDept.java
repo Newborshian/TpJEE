@@ -2,6 +2,11 @@ package controller;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
 import Entity.DeptPair;
 import Services.DeptNumService;
 import Services.NumDeptMapper;
@@ -45,6 +50,50 @@ public class ShowDept extends HttpServlet {
     }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
+		String deptNum = request.getParameter("dept-num");
+        String deptName = request.getParameter("dept-nom");
+
+        System.out.println("Num de département = " + deptNum);
+        System.out.println("Num de département = " + deptName);
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction txn = em.getTransaction();
+
+        // retrieving dept-num name value send by POST form request
+
+        System.out.println("Before persist condition");
+        	if (deptNum != "" || deptName != "") {
+            try {
+                txn.begin();
+
+                DeptPair deptPair = new DeptPair(deptNum, deptName);
+                em.persist(deptPair);
+
+                txn.commit();
+            } catch (Exception e) {
+                if (txn != null) {
+                    txn.rollback();
+                }
+                e.printStackTrace();
+            } finally {
+                if (em != null) {
+                    em.close();
+                }
+                if (emf != null) {
+                    emf.close();
+                }
+            }
+
+            System.out.println("Data persisted to DB");
+            System.out.println("Num de département = " + deptNum);
+            System.out.println("Num de département = " + deptName);
+        } else {
+            System.out.println("data not persisted to the DB");
+            System.out.println("Num de département = " + deptNum);
+            System.out.println("Num de département = " + deptName);
+        }
+
 }
+    }
+

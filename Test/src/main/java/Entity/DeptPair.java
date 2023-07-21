@@ -25,4 +25,14 @@ public class DeptPair {
 	  public String getDeptName() {
 	    return deptName;
 	  }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	  
+	  
 }

@@ -12,7 +12,7 @@
         <p>Welcome to the homepage</p>
         
         <form action="ShowDept" method="POST">
-            <input type="text" name="dept-num" placeholder="Entrez un numéro de département"/>
+            <input type="text" name="deptNum" placeholder="Entrez un numéro de département"/>
             <br>
             <input type="submit" value="Envoyer"/>
         </form>

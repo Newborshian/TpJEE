@@ -1,0 +1,39 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+import Entity.DeptPair;
+import Services.NumDeptMapper;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class CreateDeptPair
+ */
+@WebServlet("/CreateDeptPair")
+public class CreateDeptPair extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
+    private EntityManager em = emf.createEntityManager();
+    private EntityTransaction txn = em.getTransaction();
+    public CreateDeptPair() {
+  
+    }
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String deptNumber = request.getParameter("dept-num");
+		String deptName = request.getParameter("dept-name");
+		
+		DeptPair deptPair = new DeptPair(deptNumber, deptName);
+		em.persist(deptPair);		
+	}
+}

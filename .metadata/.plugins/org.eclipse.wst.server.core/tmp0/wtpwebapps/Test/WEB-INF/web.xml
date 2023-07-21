@@ -6,5 +6,7 @@
     <welcome-file>show-departement-1.jsp</welcome-file>
     <welcome-file>unknown-1-1.jsp</welcome-file>
     <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index2.jsp</welcome-file>
+    <welcome-file>index3.jsp</welcome-file>
   </welcome-file-list>
 </web-app>
